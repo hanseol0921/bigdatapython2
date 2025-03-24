@@ -14,9 +14,6 @@ response = requests.get(URL)
 # 🔹 상태 코드 확인 (200이면 정상)
 print("응답 상태 코드:", response.status_code)
 
-# 🔹 API 응답 출력 (디버깅용)
-print("API 응답 내용:", response.text)
-
 # 🔹 데이터 확인
 try:
     data = response.json()
