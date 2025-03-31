@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+import random
+import time
 
 # 멜론 차트 주소
 url = "https://www.melon.com/chart/index.htm"
@@ -40,6 +42,20 @@ for row in chart_rows:
     results.append((rank, title, artist))
 
 # 4. 추출 결과 출력
-for rank, title, artist in results:
-    print(f"{rank}위 {artist} - {title}")
-    
+#for rank, title, artist in results:
+#    print(f"{rank}위 {artist} - {title}")
+
+print(" ")
+
+
+melon = random.choice(results)
+random_rank, random_title, random_artist = melon
+print("오늘 멜론탑백 추천곡은")
+
+DDDD = ["두", "두", "두","둥"]
+
+for num in DDDD:
+    print(num)
+    time.sleep(1) 
+
+print(f"{random_artist} - {random_title} 입니다.") 
