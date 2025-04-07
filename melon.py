@@ -59,9 +59,3 @@ for num in DDDD:
     time.sleep(1) 
 
 print(f"{random_rank}위 '{random_artist} - {random_title}' 입니다.") 
-
-# 1. 멜론 100곡 츨력
-# 2. 멜론 50곡 출력
-# 3. 멜론 10곡 출력
-# 4. ai 추천곡 출력
-# 5. 가수 이름 검색
