@@ -23,7 +23,7 @@ elif n == "4":
 elif n == "5":
     func.m_artist("[TOP100 가수 검색]")
 elif n == "6":
-    func.melon_csv("[멜론 TOP100을 파일에 저장합니다.]")
+    func.melon_csv("[멜론 TOP100을 파일에 저장합니다.]") #이거안됨
 
 
 else:

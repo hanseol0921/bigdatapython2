@@ -157,4 +157,5 @@ def m_artist(e):
     else:
         print(f'[웹 페이지를 가져오는 데 실패했어요. T.T | 상태 코드: {response.status_code}]')
 
-def 
+def melon_csv(f):
+    print(f)
