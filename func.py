@@ -156,17 +156,32 @@ def m_artist(e):
     else:
         print(f'[웹 페이지를 가져오는 데 실패했어요. T.T | 상태 코드: {response.status_code}]')
 
+
 def melon_csv(f):
     print(f)
-    song_list = melon_chart(100)
+    file_path = 'melonTOP100.csv'
+    url = 'https://www.melon.com/chart/index.htm'
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+        }
 
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        songs = soup.select('tr[data-song-no]')
+        song_list = []
+
+        for song in songs:
+            rank = song.select_one('span.rank').text.strip()
+            title = song.select_one('div.ellipsis.rank01 a').text.strip()
+            artist = song.select_one('div.ellipsis.rank02 a').text.strip()
+            song_list.append((rank, title, artist))
     try:
-        with open("melon_chart.csv", mode='w', newline='', encoding='utf-8') as file:
+        with open(file_path, mode='w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
-            writer.writerow(["순위", "제목", "아티스트"])
+            writer.writerow(['순위', '제목', '아티스트'])
             writer.writerows(song_list)
-
-        print(f"'{'melon_chart.csv'}' 파일이 성공적으로 생성되었습니다.")
-
+            
     except Exception as e:
-        print(f"파일 쓰기 중 오류 발생: {e}")
+        print(f"'{file_path}' 파일이 성공적으로 생성되었습니다.")
