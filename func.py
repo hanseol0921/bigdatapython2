@@ -4,11 +4,7 @@ import random
 import time
 import csv
 
-def
-
-def m000(a, c):
-    print(a)
-    time.sleep(1)
+def melon_chart(limit):
     url = 'https://www.melon.com/chart/index.htm'
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
@@ -17,16 +13,15 @@ def m000(a, c):
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
+        songs = soup.select('tr[data-song-no]')
 
-    songs = soup.select('tr[data-song-no]')
-
-    for index, song in enumerate(songs):
-        if index >= c:
-            break
-        rank = song.select_one('span.rank').text.strip()
-        title = song.select_one('div.ellipsis.rank01 a').text.strip()
-        artist = song.select_one('div.ellipsis.rank02 a').text.strip()
-        print(f'{rank}위 {title} - {artist}')
+        return [(song.select_one('span.rank').text.strip(),
+                 song.select_one('div.ellipsis.rank01 a').text.strip(),
+                 song.select_one('div.ellipsis.rank02 a').text.strip()) 
+                for song in songs[:limit]]
+    else:
+        print(f"🚨 웹 페이지를 가져오는 데 실패했습니다. 상태 코드: {response.status_code}")
+        return []
 
 def m_random(d):
     print(d)
@@ -163,20 +158,15 @@ def m_artist(e):
 
 def melon_csv(f):
     print(f)
-    
-    data_to_write = [
-        ['순위', '제목', '가수'],
-        [1, '1노래', '1가수'],
-        [2, '2노래', '2가수'],
-        [3, '3노래', '3가수']
-    ]
-    file_path = 'music.csv'
-    try:
-        with open(file_path, mode='w', newline='', encoding='utf-8') as file:
-            writer = csv.writer(file)
-            writer.writerows(data_to_write)
+    song_list = melon_chart(100)
 
-        print(f"'{file_path}' 파일이 성공적으로 생성되었습니다.")
+    try:
+        with open("melon_chart.csv", mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow(["순위", "제목", "아티스트"])
+            writer.writerows(song_list)
+
+        print(f"'{'melon_chart.csv'}' 파일이 성공적으로 생성되었습니다.")
 
     except Exception as e:
         print(f"파일 쓰기 중 오류 발생: {e}")
