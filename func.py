@@ -131,7 +131,7 @@ def m_artist(e):
         if found_songs:
             print(f"[<{s}>의 노래 목록이에요.]")
             for song in found_songs:
-                print(f'{song[0]}위 {song[1]} - {song[2]}')
+                print(f'{song[1]} - {song[2]} ({song[0]}위)')
         else:
             print(f"[TOP 100곡 내 <{s}>의 노래가 없어요.]")
     else:
