@@ -19,7 +19,7 @@ elif n == "2":
 elif n == "3":
     func.m10("[멜론 TOP10]")
 elif n == "4":
-    func.m_random("[노래추천기능]")
+    func.m_random("[노래 추천 기능]")
 elif n == "5":
     func.m_artist("[TOP100 가수 검색]")
 elif n == "6":
@@ -27,6 +27,6 @@ elif n == "6":
 
 
 else:
-    print("1~5까지의 수를 입력해 주세요")
+    print("1~56까지의 수를 입력해 주세요")
 
 #func.m000("[멜론내맘대로출력]", 5)
