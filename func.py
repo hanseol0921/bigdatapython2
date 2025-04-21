@@ -119,11 +119,13 @@ def m10(a):
 
     songs = soup.select('tr[data-song-no]')
 
-    for song in songs:
+    for index, song in enumerate(songs):
+        if index >= 10:
+            break
         rank = song.select_one('span.rank').text.strip()
         title = song.select_one('div.ellipsis.rank01 a').text.strip()
         artist = song.select_one('div.ellipsis.rank02 a').text.strip()
-        song_list.append((rank, title, artist))
+        print(f'{rank}위 {title} - {artist}')
 
 def m_artist(e):
     print(e)
@@ -151,7 +153,7 @@ def m_artist(e):
         if found_songs:
             print(f"[<{s}>의 노래 목록이에요.]")
             for song in found_songs:
-                print(f'{song[0]}위 | 제목: {song[1]} | 아티스트: {song[2]}')
+                print(f'{song[0]}위 {song[1]} - {song[2]}')
         else:
             print(f"[TOP 100곡 내 <{s}>의 노래가 없어요.]")
     else:
